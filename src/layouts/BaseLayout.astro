@@ -4,6 +4,13 @@ import '@/styles/starwind.css';
 
 // Components
 import Nav from '@/components/ui/Nav.astro';
+
+// Constants
+const SITE_URL = 'contentcue.xyz';
+const SITE_TITLE = 'Join the ContentCue Waitlist - Turn Keywords into SEO Blog Ideas';
+const SITE_DESCRIPTION =
+  'Type a keyword, get SEO-ready ideas and full blog outlines in seconds. Built for creators who hate overthinking.';
+const SITE_IMAGE = '/twitter-banner.png';
 ---
 
 <html lang='en'>
@@ -12,7 +19,31 @@ import Nav from '@/components/ui/Nav.astro';
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>Join the ContentCue Waitlist - Turn Keywords into SEO Blog Ideas</title>
+
+    <!-- SEO -->
+    <link rel='canonical' href={SITE_URL} />
+
+    <!-- Open Graph -->
+    <meta property='og:site_name' content={SITE_TITLE} />
+    <meta property='og:title' content={SITE_URL} />
+    <meta property='og:description' content={SITE_DESCRIPTION} />
+    <meta property='og:url' content={SITE_URL} />
+    <meta property='og:image' content={SITE_IMAGE} />
+    <meta property='og:image:url' content={SITE_IMAGE} />
+    <meta property='og:image:secure_url' content={SITE_IMAGE} />
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='600' />
+    <meta property='og:image:alt' content={SITE_TITLE} />
+
+    <!-- Twitter -->
+    <meta name='twitter:title' content={SITE_TITLE} />
+    <meta name='twitter:description' content={SITE_DESCRIPTION} />
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:image' content={SITE_IMAGE} />
+    <meta name='twitter:image:alt' content={SITE_TITLE} />
+    <meta name='twitter:domain' content={SITE_URL} />
+
+    <title>{SITE_TITLE}</title>
   </head>
   <body class='max-w-7xl mx-auto'>
     <Nav />
