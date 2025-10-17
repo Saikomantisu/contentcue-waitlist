@@ -17,7 +17,10 @@ export const server = {
         return { success: false, error: 'Missing SHEET_ID environment variable' };
       }
 
+      const credentials = JSON.parse(import.meta.env.GOOGLE_APPLICATION_CREDENTIALS_JSON!);
+
       const auth = new GoogleAuth({
+        credentials,
         scopes: ['https://www.googleapis.com/auth/spreadsheets'],
       });
 
