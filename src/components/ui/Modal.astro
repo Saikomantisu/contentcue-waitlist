@@ -1,0 +1,30 @@
+---
+import { Button } from '@/components/starwind/button';
+
+export type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<div id='modal' class='h-screen fixed inset-0 bg-[#000000d9] items-center justify-center hidden'>
+  <div class='bg-white p-6 rounded-md shadow-lg max-w-sm text-center'>
+    <h2 class='text-2xl font-bold mb-4'>{title}</h2>
+    <p class='text-muted-foreground'>{description}</p>
+    <Button class='mt-6' variant='primary' id='closeModal'> Close </Button>
+  </div>
+</div>
+
+<script is:inline>
+  const modal = document.querySelector('#modal');
+  const modalCloseButton = document.querySelector('#closeModal');
+
+  if (modal && modalCloseButton) {
+    modalCloseButton.addEventListener('click', () => {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    });
+  }
+</script>

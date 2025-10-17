@@ -1,0 +1,27 @@
+{
+  "$schema": "https://starwind.dev/config-schema.json",
+  "tailwind": {
+    "css": "src/styles/starwind.css",
+    "baseColor": "slate",
+    "cssVariables": true
+  },
+  "componentDir": "src/components",
+  "components": [
+    {
+      "name": "input",
+      "version": "1.3.0"
+    },
+    {
+      "name": "button",
+      "version": "2.2.0"
+    },
+    {
+      "name": "separator",
+      "version": "1.0.0"
+    },
+    {
+      "name": "item",
+      "version": "1.0.0"
+    }
+  ]
+}

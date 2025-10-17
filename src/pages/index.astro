@@ -1,0 +1,114 @@
+---
+// Components
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Input } from '@/components/starwind/input';
+import { Button } from '@/components/starwind/button';
+import Modal from '@/components/ui/Modal.astro';
+---
+
+<BaseLayout>
+  <div
+    class='h-[80vh] flex justify-center items-center flex-col space-y-4 text-center text-balance'
+  >
+    <h1 class='text-5xl font-extrabold md:w-[16ch] leading-16 md:text-6xl md:leading-20'>
+      Turn
+      <span class='text-primary underline decoration-wavy decoration-primary decoration-3'>
+        Keywords
+      </span>
+      Into SEO Blog Ideas Fast
+    </h1>
+
+    <p class='text-md md:text-lg text-muted-foreground md:w-[600px]'>
+      Type a keyword, get SEO-ready ideas and full blog outlines in seconds. Built for creators who
+      hate overthinking.
+    </p>
+
+    <form method='post' id='waitlist-form' class='md:grid grid-cols-3 gap-3'>
+      <Input
+        id='waitlist-form-email'
+        class='col-span-2 mb-3'
+        placeholder='Enter your email'
+        type='email'
+        name='email'
+        required
+      />
+      <Button id='waitlist-submit-button' type='submit'> Join the Waitlist </Button>
+    </form>
+
+    <Modal
+      title='Thank you for joining the waitlist!'
+      description="We'll keep you updated on our progress."
+    />
+  </div>
+</BaseLayout>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  const waitlistSubmitButton = document.querySelector(
+    '#waitlist-submit-button'
+  ) as HTMLButtonElement;
+  const waitlistForm = document.querySelector('#waitlist-form') as HTMLFormElement;
+  const emailInputField = document.querySelector('#waitlist-form-email') as HTMLInputElement;
+  const modal = document.querySelector('#modal');
+  const errorBannerId = 'waitlist-error-banner';
+
+  waitlistForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    try {
+      waitlistSubmitButton.textContent = 'Submitting...';
+      waitlistSubmitButton.disabled = true;
+
+      const formData = new FormData(waitlistForm);
+
+      const { data } = await actions.addNewWaitlist(formData);
+
+      if (!data?.success) {
+        const message = data?.error || 'Failed to join the waitlist. Please try again.';
+
+        console.error('Waitlist error:', message);
+
+        let banner = document.getElementById(errorBannerId);
+
+        if (!banner) {
+          banner = document.createElement('div');
+          banner.id = errorBannerId;
+          banner.className =
+            'w-full md:w-[600px] text-left bg-red-50 text-red-700 border border-red-200 rounded-md p-3 mb-3';
+          waitlistForm.parentElement?.insertBefore(banner, waitlistForm);
+        }
+
+        banner.textContent = message;
+        return;
+      }
+
+      // success: clear any previous error banner
+      const existingBanner = document.getElementById(errorBannerId);
+
+      if (existingBanner) existingBanner.remove();
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    } catch (error) {
+      console.error('Error calling action:', error);
+      let banner = document.getElementById(errorBannerId);
+
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = errorBannerId;
+        banner.className =
+          'w-full md:w-[600px] text-left bg-red-50 text-red-700 border border-red-200 rounded p-3 mb-3';
+        waitlistForm.parentElement?.insertBefore(banner, waitlistForm);
+      }
+
+      banner.textContent = 'Error connecting to server. Please try again.';
+    } finally {
+      waitlistSubmitButton.textContent = 'Join the Waitlist';
+      waitlistSubmitButton.disabled = false;
+      emailInputField.value = '';
+    }
+  });
+</script>

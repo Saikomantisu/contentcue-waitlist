@@ -1,0 +1,21 @@
+---
+// Components
+import { Button } from '@/components/starwind/button';
+import StarIcon from '@/components/icons/StarIcon.astro';
+import { Twitter } from 'lucide-astro';
+---
+
+<header>
+  <nav class='py-4 grid grid-cols-2 items-center font-medium xl:px-0 px-4'>
+    <a href='/' class='flex items-center gap-2 font-bold text-lg'>
+      <span><StarIcon /></span>
+      ContentCue
+    </a>
+
+    <div class='flex justify-end'>
+      <Button href='https://x.com/ContentCue' variant='ghost' class='border-1'>
+        <Twitter class='text-primary' fill='#1447e6' />
+      </Button>
+    </div>
+  </nav>
+</header>
