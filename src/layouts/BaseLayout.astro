@@ -4,6 +4,7 @@ import '@/styles/starwind.css';
 
 // Components
 import Nav from '@/components/ui/Nav.astro';
+import Analytics from '@vercel/analytics/astro';
 
 // Constants
 const SITE_URL = 'contentcue.xyz';
@@ -41,6 +42,8 @@ const SITE_IMAGE = '/twitter-banner.png';
     <meta name='twitter:image' content={SITE_IMAGE} />
     <meta name='twitter:image:alt' content={SITE_TITLE} />
     <meta name='twitter:domain' content={SITE_URL} />
+
+    <Analytics />
 
     <title>{SITE_TITLE}</title>
   </head>
