@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # Google Service Account Key
 secrets.json
+
+# Vercel
+.vercel/
