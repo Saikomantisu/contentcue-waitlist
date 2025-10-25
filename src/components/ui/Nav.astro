@@ -2,7 +2,7 @@
 // Components
 import { Button } from '@/components/starwind/button';
 import StarIcon from '@/components/icons/StarIcon.astro';
-import { Twitter } from 'lucide-astro';
+import { Instagram, Twitter } from 'lucide-astro';
 ---
 
 <header>
@@ -12,9 +12,13 @@ import { Twitter } from 'lucide-astro';
       ContentCue
     </a>
 
-    <div class='flex justify-end'>
+    <div class='flex space-x-3 justify-end'>
       <Button href='https://x.com/ContentCue' variant='ghost' class='border-1'>
         <Twitter class='text-primary' fill='#1447e6' />
+      </Button>
+
+      <Button href='https://www.instagram.com/getcontentcue/' variant='ghost' class='border-1'>
+        <Instagram class='text-primary' />
       </Button>
     </div>
   </nav>
